@@ -3,6 +3,6 @@
  */
 export interface messageType {
     id: number;
-    userId: number;
+    userUid: number;
     content: string;
 }

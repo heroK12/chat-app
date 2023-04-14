@@ -32,11 +32,15 @@ export const Login = () => {
         const auth = getAuth();
         signInAnonymously(auth)
             .then((UserCredentialImpl: any) => {
-                localStorage.setItem("userName", JSON.stringify(user));
                 localStorage.setItem(
-                    "uid",
-                    JSON.stringify(UserCredentialImpl.user.uid)
+                    "user",
+                    JSON.stringify({
+                        userName: user.userName,
+                        uid: UserCredentialImpl.user.uid,
+                        isSignIn: true,
+                    })
                 );
+
                 dispatch(
                     login({
                         userName: user.userName,

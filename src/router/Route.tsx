@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Login } from "../views/Login";
 import { Chat } from "../views/Chat";
 import { NotFound } from "../views/NotFound";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { rootState } from "../common/rootState.type";
+import { login } from "../feature/auth/authSlice";
+
+const loginUser = localStorage.getItem("user");
 
 export const RouterConfig = () => {
-    const isLoggedIn = useSelector((state: rootState) => state.isSignIn);
+    const isLogin = useSelector((state: rootState) => state.isSignIn);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (loginUser) {
+            dispatch(login(JSON.parse(loginUser)));
+        }
+    }, [dispatch]);
+
     return (
         <>
             <BrowserRouter>
@@ -15,7 +26,7 @@ export const RouterConfig = () => {
                     <Route
                         path="/"
                         element={
-                            isLoggedIn ? (
+                            isLogin ? (
                                 <Chat />
                             ) : (
                                 <Navigate replace to="/Login" />
@@ -25,11 +36,7 @@ export const RouterConfig = () => {
                     <Route
                         path="/Login"
                         element={
-                            !isLoggedIn ? (
-                                <Login />
-                            ) : (
-                                <Navigate replace to="/" />
-                            )
+                            !isLogin ? <Login /> : <Navigate replace to="/" />
                         }
                     />
                     <Route path="*" element={<NotFound />} />

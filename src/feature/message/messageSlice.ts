@@ -5,12 +5,12 @@ const state = {
     messages: [
         {
             id: 1,
-            userId: 1,
+            userUid: 1,
             content: "aaa",
         },
         {
             id: 2,
-            userId: 2,
+            userUid: 2,
             content: "bbb",
         },
     ],
