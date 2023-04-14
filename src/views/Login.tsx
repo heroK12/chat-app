@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import { TextField } from "../feature/auth/TextField";
 import React, { useState } from "react";
 import { validateNameField } from "../feature/auth/validation";
-import { getApp } from "firebase/app";
 import { getAuth, linkWithCredential, signInAnonymously } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../feature/auth/authSlice";
+import { rootState } from "../common/rootState.type";
 
 export interface FormField {
     userName: string;
@@ -16,6 +17,8 @@ export interface FormErrors {
 export const Login = () => {
     const [user, setUser] = useState<FormField>({ userName: "" });
     const [errors, setErrors] = useState<FormErrors>({});
+    const dispatch = useDispatch();
+    const loggedIn = useSelector((state: rootState) => state);
 
     const validate = (name: string, value: string) => {
         if (name === "userName") {
@@ -33,6 +36,13 @@ export const Login = () => {
                 localStorage.setItem(
                     "uid",
                     JSON.stringify(UserCredentialImpl.user.uid)
+                );
+                dispatch(
+                    login({
+                        userName: user.userName,
+                        uid: UserCredentialImpl.user.id,
+                        isSignIn: true,
+                    })
                 );
             })
             .catch((error) => {
@@ -87,6 +97,12 @@ export const Login = () => {
                             disabled={isEnterButtonDisabled()}
                         >
                             入室する
+                        </button>
+                        <button
+                            className="w-full p-3 border border-gray-200 rounded-md shadow-md bg-orange-500 disabled:opacity-50 focus:outline-none"
+                            onClick={() => console.log("loggin:", loggedIn)}
+                        >
+                            ログイン確認
                         </button>
                     </div>
                 </form>

@@ -1,16 +1,42 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Navigate,
+} from "react-router-dom";
 import { Login } from "../views/Login";
 import { ChatArea } from "../views/Chat";
 import { NotFound } from "../views/NotFound";
+import { useSelector } from "react-redux";
+import { rootState } from "../common/rootState.type";
 
 export const RouterConfig = () => {
+    const isLoggedIn = useSelector((state: rootState) => state.isSignIn);
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route index element={<Login />} />
-                    <Route path="chat" element={<ChatArea />} />
+                    <Route
+                        path="/"
+                        element={
+                            isLoggedIn ? (
+                                <ChatArea />
+                            ) : (
+                                <Navigate replace to="/Login" />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/Login"
+                        element={
+                            !isLoggedIn ? (
+                                <Login />
+                            ) : (
+                                <Navigate replace to="/" />
+                            )
+                        }
+                    />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </BrowserRouter>
