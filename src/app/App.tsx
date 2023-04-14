@@ -1,8 +1,8 @@
-import { ChatArea } from "../feature/message/ChatArea";
 import { Provider } from "react-redux";
-import { store } from "./store";
 import { getApp } from "firebase/app";
+import { store } from "./store";
 import { initializeFirebaseApp } from "../lib/firebase/firebase";
+import { RouterConfig } from "../router/Route";
 
 initializeFirebaseApp();
 function App() {
@@ -10,7 +10,7 @@ function App() {
     return (
         <div className="App">
             <Provider store={store}>
-                <ChatArea />
+                <RouterConfig />
             </Provider>
         </div>
     );
