@@ -1,12 +1,7 @@
 import React from "react";
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-    Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Login } from "../views/Login";
-import { ChatArea } from "../views/Chat";
+import { Chat } from "../views/Chat";
 import { NotFound } from "../views/NotFound";
 import { useSelector } from "react-redux";
 import { rootState } from "../common/rootState.type";
@@ -21,7 +16,7 @@ export const RouterConfig = () => {
                         path="/"
                         element={
                             isLoggedIn ? (
-                                <ChatArea />
+                                <Chat />
                             ) : (
                                 <Navigate replace to="/Login" />
                             )

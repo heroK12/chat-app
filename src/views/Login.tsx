@@ -40,7 +40,7 @@ export const Login = () => {
                 dispatch(
                     login({
                         userName: user.userName,
-                        uid: UserCredentialImpl.user.id,
+                        uid: UserCredentialImpl.user.uid,
                         isSignIn: true,
                     })
                 );
@@ -98,14 +98,14 @@ export const Login = () => {
                         >
                             入室する
                         </button>
-                        <button
-                            className="w-full p-3 border border-gray-200 rounded-md shadow-md bg-orange-500 disabled:opacity-50 focus:outline-none"
-                            onClick={() => console.log("loggin:", loggedIn)}
-                        >
-                            ログイン確認
-                        </button>
                     </div>
                 </form>
+                <button
+                    className="w-full p-3 border border-gray-200 rounded-md shadow-md bg-orange-500 disabled:opacity-50 focus:outline-none"
+                    onClick={() => console.log("loggin:", loggedIn)}
+                >
+                    ログイン確認
+                </button>
             </div>
         </div>
     );
