@@ -2,6 +2,7 @@ import { Provider, useDispatch } from "react-redux";
 import { store } from "./store";
 import { initializeFirebaseApp } from "../lib/firebase/firebase";
 import { RouterConfig } from "../router/Route";
+import "../App.css";
 
 initializeFirebaseApp();
 function App() {

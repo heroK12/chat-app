@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../feature/auth/authSlice";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const Header = () => {
     const dispatch = useDispatch();
 
     const onClickLogout = () => {
@@ -11,8 +11,8 @@ export const Navbar = () => {
     };
     return (
         <>
-            <nav className="w-full text-gray-600">
-                <div className="flex justify-between bg-gray-50 mx-auto">
+            <nav className="w-full text-gray-600 header-nav">
+                <div className="flex justify-between bg-gray-50 mx-auto h-full items-center">
                     <Link className="flex items-center text-gray-900" to="/">
                         <img
                             src="https://placehold.jp/300x300.png"

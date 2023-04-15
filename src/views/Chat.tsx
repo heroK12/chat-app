@@ -1,18 +1,14 @@
 import { ChatArea } from "./Components/ChatArea";
 import { Sidebar } from "./Components/Sidebar";
-import { Navbar } from "./Components/Navbar";
+import { Header } from "./Components/Header";
 
 export const Chat = () => {
-    
-
     return (
         <>
-            <div className="flex flex-col h-screen">
-                <Navbar />
-                <div className="flex h-full">
-                    <Sidebar />
-                    <ChatArea />
-                </div>
+            <Header />
+            <div className="flex m-0 content">
+                <Sidebar />
+                <ChatArea />
             </div>
         </>
     );
