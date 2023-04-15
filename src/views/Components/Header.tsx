@@ -1,13 +1,19 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../feature/auth/authSlice";
 import { Link } from "react-router-dom";
 import { resetMessage } from "../../feature/message/messageSlice";
+import { getDatabase, onDisconnect, ref, update } from "firebase/database";
+import { rootState } from "../../common/rootState.type";
 
 export const Header = () => {
+    const userInfo = useSelector((state: rootState) => state.auth);
+    const db = getDatabase();
+    const userRef = ref(db, `user/${userInfo.uid}`);
     const dispatch = useDispatch();
 
     const onClickLogout = () => {
         localStorage.removeItem("user");
+        update(userRef, {});
         dispatch(logout());
         dispatch(resetMessage());
     };

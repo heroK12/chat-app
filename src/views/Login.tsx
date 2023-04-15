@@ -4,6 +4,8 @@ import { validateNameField } from "../feature/auth/validation";
 import { getAuth, signInAnonymously } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { login } from "../feature/auth/authSlice";
+import { FirebaseError } from "firebase/app";
+import { getDatabase, push, ref, set } from "firebase/database";
 
 export interface FormField {
     userName: string;
@@ -29,27 +31,44 @@ export const Login = () => {
 
         const auth = getAuth();
         signInAnonymously(auth)
-            .then((UserCredentialImpl: any) => {
+            .then(async (UserCredentialImpl: any) => {
+                // ローカルストレージでセッションとして管理
                 localStorage.setItem(
                     "user",
                     JSON.stringify({
                         userName: user.userName,
                         uid: UserCredentialImpl.user.uid,
                         isSignIn: true,
+                        status: "online",
                     })
                 );
 
+                // ローカルで管理
                 dispatch(
                     login({
                         userName: user.userName,
                         uid: UserCredentialImpl.user.uid,
                         isSignIn: true,
+                        status: "online",
                     })
                 );
+
+                // ログインした際に、DB上にオンラインフラグを立てる
+                const db = getDatabase();
+                const dbRef = ref(db, `user/${UserCredentialImpl.user.uid}`);
+                await set(dbRef, {
+                    userName: user.userName,
+                    uid: UserCredentialImpl.user.uid,
+                    isSignIn: true,
+                    status: "online",
+                });
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                if (error instanceof FirebaseError) {
+                    console.log(error);
+                }
             });
     };
 
