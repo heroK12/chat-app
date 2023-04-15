@@ -1,6 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { rootState } from "../../common/rootState.type";
-import { logout } from "../../feature/auth/authSlice";
 
 export const Sidebar = () => {
     const userInfo = useSelector((state: rootState) => state.auth);

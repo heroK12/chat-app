@@ -1,10 +1,9 @@
 import { TextField } from "../feature/auth/TextField";
 import React, { useState } from "react";
 import { validateNameField } from "../feature/auth/validation";
-import { getAuth, linkWithCredential, signInAnonymously } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { getAuth, signInAnonymously } from "firebase/auth";
+import { useDispatch } from "react-redux";
 import { login } from "../feature/auth/authSlice";
-import { rootState } from "../common/rootState.type";
 
 export interface FormField {
     userName: string;
@@ -18,7 +17,6 @@ export const Login = () => {
     const [user, setUser] = useState<FormField>({ userName: "" });
     const [errors, setErrors] = useState<FormErrors>({});
     const dispatch = useDispatch();
-    const loggedIn = useSelector((state: rootState) => state);
 
     const validate = (name: string, value: string) => {
         if (name === "userName") {
@@ -106,7 +104,6 @@ export const Login = () => {
                 </form>
                 {/* <button
                     className="w-full p-3 border border-gray-200 rounded-md shadow-md bg-orange-500 disabled:opacity-50 focus:outline-none"
-                    onClick={() => console.log("loggin:", loggedIn)}
                 >
                     ログイン確認
                 </button> */}

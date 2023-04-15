@@ -2,7 +2,8 @@
  * チャット形式
  */
 export interface messageType {
-    id: number;
     userUid: number;
+    userName: string;
     content: string;
+    date: Date;
 }

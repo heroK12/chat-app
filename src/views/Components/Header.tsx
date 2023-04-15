@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../../feature/auth/authSlice";
 import { Link } from "react-router-dom";
+import { resetMessage } from "../../feature/message/messageSlice";
 
 export const Header = () => {
     const dispatch = useDispatch();
@@ -8,6 +9,7 @@ export const Header = () => {
     const onClickLogout = () => {
         localStorage.removeItem("user");
         dispatch(logout());
+        dispatch(resetMessage());
     };
     return (
         <>
