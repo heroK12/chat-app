@@ -10,7 +10,7 @@ import { login } from "../feature/auth/authSlice";
 const loginUser = localStorage.getItem("user");
 
 export const RouterConfig = () => {
-    const isLogin = useSelector((state: rootState) => state.isSignIn);
+    const isLogin = useSelector((state: rootState) => state.auth.isSignIn);
     const dispatch = useDispatch();
 
     useEffect(() => {

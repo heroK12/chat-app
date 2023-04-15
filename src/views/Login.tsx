@@ -97,19 +97,19 @@ export const Login = () => {
                     />
                     <div className="mb-3">
                         <button
-                            className="w-full p-3 border border-gray-200 rounded-md shadow-md bg-orange-500 disabled:opacity-50 focus:outline-none"
+                            className="w-full p-3 border border-gray-200 rounded-md shadow-md bg-indigo-500 disabled:opacity-50 focus:outline-none"
                             disabled={isEnterButtonDisabled()}
                         >
                             入室する
                         </button>
                     </div>
                 </form>
-                <button
+                {/* <button
                     className="w-full p-3 border border-gray-200 rounded-md shadow-md bg-orange-500 disabled:opacity-50 focus:outline-none"
                     onClick={() => console.log("loggin:", loggedIn)}
                 >
                     ログイン確認
-                </button>
+                </button> */}
             </div>
         </div>
     );
