@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { getDatabase, push, ref } from "firebase/database";
+import { getDatabase, push, ref, serverTimestamp } from "firebase/database";
 import React, { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { rootState } from "../../common/rootState.type";
@@ -22,7 +22,7 @@ export const ChatArea: React.FC<Props> = ({ messages }) => {
                 uid: userInfo.uid,
                 userName: userInfo.userName,
                 content: message,
-                date: Date.now(),
+                date: serverTimestamp(),
             });
             setMessage("");
         } catch (e) {

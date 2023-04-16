@@ -34,7 +34,7 @@ export const Login = () => {
             .then(async (UserCredentialImpl: any) => {
                 // ローカルストレージでセッションとして管理
                 localStorage.setItem(
-                    "user",
+                    "users",
                     JSON.stringify({
                         userName: user.userName,
                         uid: UserCredentialImpl.user.uid,
@@ -55,7 +55,7 @@ export const Login = () => {
 
                 // ログインした際に、DB上にオンラインフラグを立てる
                 const db = getDatabase();
-                const dbRef = ref(db, `user/${UserCredentialImpl.user.uid}`);
+                const dbRef = ref(db, `users/${UserCredentialImpl.user.uid}`);
                 await set(dbRef, {
                     userName: user.userName,
                     uid: UserCredentialImpl.user.uid,

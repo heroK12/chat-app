@@ -8,12 +8,12 @@ import { rootState } from "../../common/rootState.type";
 export const Header = () => {
     const userInfo = useSelector((state: rootState) => state.auth);
     const db = getDatabase();
-    const userRef = ref(db, `user/${userInfo.uid}`);
+    const userRef = ref(db, `users/${userInfo.uid}`);
     const dispatch = useDispatch();
 
     const onClickLogout = () => {
-        localStorage.removeItem("user");
-        update(userRef, {});
+        update(userRef, { status: "offline" });
+        localStorage.removeItem("users");
         dispatch(logout());
         dispatch(resetMessage());
     };
