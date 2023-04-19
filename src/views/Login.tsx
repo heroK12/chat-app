@@ -5,7 +5,7 @@ import { getAuth, signInAnonymously } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { login } from "../feature/auth/authSlice";
 import { FirebaseError } from "firebase/app";
-import { getDatabase, push, ref, set } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 
 export interface FormField {
     userName: string;
@@ -64,13 +64,13 @@ export const Login = () => {
                 });
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
                 if (error instanceof FirebaseError) {
                     console.log(error);
                 }
             });
     };
+
+    console.log("重たい");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
