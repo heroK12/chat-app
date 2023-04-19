@@ -70,8 +70,6 @@ export const Login = () => {
             });
     };
 
-    console.log("重たい");
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setUser({ ...user, [name]: value });
