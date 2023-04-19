@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../feature/message/messageSlice";
 import { rootState } from "../common/rootState.type";
-import { getAuth } from "firebase/auth";
 import { userType } from "../common/auth.type";
 
 export const Chat = () => {
@@ -56,7 +55,8 @@ export const Chat = () => {
                 console.log(e);
             }
         }
-    }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [chatRef, dispatch, uid, userInfo.userName, userRef]);
 
     /**
      * ユーザーの情報をモニタリング
