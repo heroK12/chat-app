@@ -55,8 +55,9 @@ export const Chat = () => {
                 console.log(e);
             }
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [chatRef, dispatch, uid, userInfo.userName, userRef]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
 
     /**
      * ユーザーの情報をモニタリング

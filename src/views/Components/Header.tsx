@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../feature/auth/authSlice";
 import { Link } from "react-router-dom";
 import { resetMessage } from "../../feature/message/messageSlice";
-import { getDatabase, onDisconnect, ref, update } from "firebase/database";
+import { getDatabase, ref, update } from "firebase/database";
 import { rootState } from "../../common/rootState.type";
 
 export const Header = () => {
@@ -13,7 +13,7 @@ export const Header = () => {
 
     const onClickLogout = () => {
         update(userRef, { status: "offline" });
-        localStorage.removeItem("users");
+        localStorage.removeItem("user");
         dispatch(logout());
         dispatch(resetMessage());
     };
